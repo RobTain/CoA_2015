@@ -26,3 +26,6 @@ CoA_2015_Java_Edition/.classpath
 CoA_2015_Java_Edition/.project
 CoA_2015_Java_Edition/bin/
 .DS_Store
+.classpath
+.project
+bin/Day01/Day01.txt
