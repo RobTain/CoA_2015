@@ -8,8 +8,8 @@ public class Day01 {
 	private int solution1 = 0;
 	private int solution2 = 0;
 	static Scanner in;
-	
-	public static void main(String[] args)   {
+
+	public static void main(String[] args) {
 		Day01 day01 = new Day01();
 		Day01.solution(day01);
 		System.out.println("Solution 1: " + day01.getSolution1());
@@ -17,13 +17,13 @@ public class Day01 {
 	}
 
 	private static void solution(Day01 day01) {
-		
+
 		StringBuilder sb = new StringBuilder();
 		try {
 			in = new Scanner(new FileReader("./src/Day01/Day01.txt"));
-			while(in.hasNext()) {
+			while (in.hasNext()) {
 				sb = new StringBuilder().append(in.next());
-				day01.setSolution1(day01.getSolution1() + calculateNumberFromString(sb.toString()));		
+				day01.setSolution1(day01.getSolution1() + calculateNumberFromString(sb.toString()));
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("File not Found");
@@ -32,21 +32,13 @@ public class Day01 {
 		}
 	}
 
-	
 	private static int calculateNumberFromString(String string) {
-		String result = "";
-		char[] temp = string.toCharArray();
-		for (char c : temp) {
-			
-			if (Character.isDigit(c)) {
-				result += c;
-			}
+		int count = 0;
+		for (int i = 0; i < string.length(); i++) {
+			if (string.charAt(i) == '(') { count++; } else { count--;}
 		}
-		result = result.substring(0,1) + result.substring(result.length()-1, result.length());
-		
-		return Integer.parseInt(result);
+		return count;
 	}
-	
 
 	public int getSolution1() {
 		return solution1;
