@@ -17,15 +17,15 @@ public class Day02 {
 		System.out.println("Solution 2: " + day02.getSolution2());
 	}
 
-	private static void solution(Day02 day01) {
+	private static void solution(Day02 day02) {
 
 		StringBuilder sb = new StringBuilder();
 		try {
 			in = new Scanner(new FileReader("./src/Day02/Day02.txt"));
 			while (in.hasNext()) {
 				sb = new StringBuilder().append(in.next());
-				day01.setSolution1(day01.getSolution1() + solution1(sb.toString()));
-				day01.setSolution2(day01.getSolution2() + solution2(sb.toString()));
+				day02.setSolution1(day02.getSolution1() + solution1(sb.toString()));
+				day02.setSolution2(day02.getSolution2() + solution2(sb.toString()));
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("File not Found");

@@ -2,8 +2,6 @@ package Day03;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class Day03 {
@@ -18,15 +16,15 @@ public class Day03 {
 		System.out.println("Solution 2: " + day03.getSolution2());
 	}
 
-	private static void solution(Day03 day01) {
+	private static void solution(Day03 day03) {
 
 		StringBuilder sb = new StringBuilder();
 		try {
 			in = new Scanner(new FileReader("./src/Day03/Day03.txt"));
 			while (in.hasNext()) {
 				sb = new StringBuilder().append(in.next());
-				day01.setSolution1(day01.getSolution1() + solution1(sb.toString()));
-				day01.setSolution2(day01.getSolution2() + solution2(sb.toString()));
+				day03.setSolution1(day03.getSolution1() + solution1(sb.toString()));
+				day03.setSolution2(day03.getSolution2() + solution2(sb.toString()));
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("File not Found");
