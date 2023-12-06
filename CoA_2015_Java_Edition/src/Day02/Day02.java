@@ -48,8 +48,9 @@ public class Day02 {
 	}
 
 	private static int solution2(String string) {
-
-		return 0;
+		int[] input = Arrays.stream(string.split("x")).mapToInt(Integer::parseInt).toArray();
+		Arrays.sort(input);
+		return ((input[0]+input[0]+input[1]+input[1])+(input[0]*input[1]*input[2]));
 	}
 
 	public int getSolution1() {
