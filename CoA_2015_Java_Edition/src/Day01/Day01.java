@@ -36,16 +36,16 @@ public class Day01 {
 	private static int solution1(String string) {
 		int count = 0;
 		for (int i = 0; i < string.length(); i++) {
-			if (string.charAt(i) == '(') { count++; } else { count--;}
+			if (string.charAt(i) == '(') { count++; } else { count--; }
 		}
 		return count;
 	}
-	
+
 	private static int solution2(String string) {
 		int count = 0;
 		for (int i = 0; i < string.length(); i++) {
-			if (string.charAt(i) == '(') { count++; } else { count--;}
-			if (count == -1) { return ++i;}
+			if (string.charAt(i) == '(') { count++; } else { count--; }
+			if (count == -1) { return ++i; }
 		}
 		return 0;
 	}
