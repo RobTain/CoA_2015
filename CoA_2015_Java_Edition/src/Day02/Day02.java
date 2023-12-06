@@ -2,6 +2,7 @@ package Day02;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Day02 {
@@ -34,12 +35,20 @@ public class Day02 {
 	}
 
 	private static int solution1(String string) {
-	
-		return 0;
+		int result = 0;
+		int[] input = Arrays.stream(string.split("x")).mapToInt(Integer::parseInt).toArray();
+		int[] calculation = new int[input.length];
+
+		calculation[0] = input[0] * input[1];
+		calculation[1] = input[1] * input[2];
+		calculation[2] = input[2] * input[0];
+		
+		for (int i : calculation) { result += i * 2; }
+		return result + Arrays.stream(calculation).min().getAsInt();
 	}
 
 	private static int solution2(String string) {
-	
+
 		return 0;
 	}
 
