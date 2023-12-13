@@ -31,15 +31,61 @@ public class Day08 {
 		} finally {
 			in.close();
 		}
-		
+
 	}
 
 	private static int solution1(String string) {
-		return 0;
+
+		StringBuilder result = new StringBuilder();
+
+		for (int i = 1; i < string.length() - 1; i++) {
+			char currentChar = string.charAt(i);
+
+			if (currentChar == '\\' && i + 1 < string.length() - 1) {
+				char nextChar = string.charAt(i + 1);
+
+				if (nextChar == '\"' || nextChar == '\\') {
+					result.append("'");
+					i++;
+				} else if (nextChar == 'x' && i + 3 < string.length() - 1) {
+					result.append((char) Integer.parseInt(string.substring(i + 2, i + 4), 16));
+					i += 3;
+				} else {
+					result.append(currentChar);
+				}
+			} else {
+				result.append(currentChar);
+			}
+		}
+
+		return string.length() - result.toString().length();
+
 	}
 
 	private static int solution2(String string) {
-		return 0;
+		
+		StringBuilder result = new StringBuilder();
+
+		for (int i = 0; i < string.length(); i++) {
+			char currentChar = string.charAt(i);
+
+			if (currentChar == '"') {
+				result.append('\\');
+				result.append('"');	
+			}else if (currentChar == '\\') {
+				result.append('\\');
+				result.append('\\');
+				
+			} else {
+				result.append(currentChar);
+			}
+		}
+		result.append('"');
+		result.insert(0, '"');
+		System.out.println(string);
+		System.out.println(result.toString());
+
+		return result.toString().length() - string.length();
 	}
 
 	public int getSolution1() {
@@ -59,4 +105,3 @@ public class Day08 {
 	}
 
 }
-
