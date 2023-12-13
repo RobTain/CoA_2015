@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-
-
 public class Day07 {
 	private int solution1 = 0;
 	private int solution2 = 0;
@@ -18,6 +16,7 @@ public class Day07 {
 		Day07.solution(day07);
 		System.out.println("Solution 1: " + day07.getSolution1());
 		System.out.println("Solution 2: " + day07.getSolution2());
+		System.out.println("NOT WORKING");
 	}
 
 	private static void solution(Day07 day07) {
@@ -27,6 +26,7 @@ public class Day07 {
 			in = new Scanner(new FileReader("./src/Day07/Day07.txt"));
 			while (in.hasNext()) {
 				sb = new StringBuilder().append(in.nextLine());
+				System.out.println(sb.toString());
 				day07.setSolution1(day07.getSolution1() + solution1(sb.toString()));
 				day07.setSolution2(day07.getSolution2() + solution2(sb.toString()));
 			}
@@ -35,9 +35,11 @@ public class Day07 {
 		} finally {
 			in.close();
 		}
-		
+
 		for (Test test : result) {
-			System.out.println(test.getLetter() + ": " + test.getValue());
+			if (test.getLetter().equals("a")) {
+				System.out.println(test.getLetter() + ": " + test.getValue());
+			}
 		}
 	}
 
@@ -46,32 +48,23 @@ public class Day07 {
 			String wire1 = string.split(" -> ")[0].split(" AND ")[0];
 			String wire2 = string.split(" -> ")[0].split(" AND ")[1];
 			String wire3 = string.split(" -> ")[1];
-			
-			// check wire exist
-			boolean checkValue = false;
-			for (Test test : result) {
-				if (test.getLetter().equals(wire3)) {
-					checkValue = true;
-				}
-			}
-			
-			// add non existing wire
-			if (!checkValue) {
-				result.add(new Test(string.split(" -> ")[1], 0));
-			}
-			
+
+			addToList(wire1);
+			addToList(wire2);
+			addToList(wire3);
+
 			// get information
 			int value1 = 0, value2 = 0, value3 = 0;
 			for (Test test : result) {
 				if (test.getLetter().equals(wire1)) {
 					value1 = test.getValue();
 				}
-				
+
 				if (test.getLetter().equals(wire2)) {
 					value2 = test.getValue();
 				}
 			}
-			
+
 			// calculate and store information
 			value3 = value1 & value2;
 			for (Test test : result) {
@@ -83,32 +76,23 @@ public class Day07 {
 			String wire1 = string.split(" -> ")[0].split(" OR ")[0];
 			String wire2 = string.split(" -> ")[0].split(" OR ")[1];
 			String wire3 = string.split(" -> ")[1];
-			
-			// check wire exist
-			boolean checkValue = false;
-			for (Test test : result) {
-				if (test.getLetter().equals(wire3)) {
-					checkValue = true;
-				}
-			}
-			
-			// add non existing wire
-			if (!checkValue) {
-				result.add(new Test(string.split(" -> ")[1], 0));
-			}
-			
+
+			addToList(wire1);
+			addToList(wire2);
+			addToList(wire3);
+
 			// get information
 			int value1 = 0, value2 = 0, value3 = 0;
 			for (Test test : result) {
 				if (test.getLetter().equals(wire1)) {
 					value1 = test.getValue();
 				}
-				
+
 				if (test.getLetter().equals(wire2)) {
 					value2 = test.getValue();
 				}
 			}
-			
+
 			// calculate and store information
 			value3 = value1 | value2;
 			for (Test test : result) {
@@ -116,25 +100,15 @@ public class Day07 {
 					test.setValue(value3);
 				}
 			}
-			
+
 		} else if (string.contains("LSHIFT")) {
 			String wire1 = string.split(" -> ")[0].split(" LSHIFT ")[0];
 			int value2 = Integer.parseInt(string.split(" -> ")[0].split(" LSHIFT ")[1]);
-			String wire3 = string.split(" -> ")[1];
-			
-			// check wire exist
-			boolean checkValue = false;
-			for (Test test : result) {
-				if (test.getLetter().equals(wire3)) {
-					checkValue = true;
-				}
-			}
-			
-			// add non existing wire
-			if (!checkValue) {
-				result.add(new Test(string.split(" -> ")[1], 0));
-			}
-			
+			String wire2 = string.split(" -> ")[1];
+
+			addToList(wire1);
+			addToList(wire2);
+
 			// get information
 			int value1 = 0, value3 = 0;
 			for (Test test : result) {
@@ -142,32 +116,22 @@ public class Day07 {
 					value1 = test.getValue();
 				}
 			}
-			
+
 			// calculate and store information
 			value3 = value1 << value2;
 			for (Test test : result) {
-				if (test.getLetter().equals(wire3)) {
+				if (test.getLetter().equals(wire2)) {
 					test.setValue(value3);
 				}
-			}			
+			}
 		} else if (string.contains("RSHIFT")) {
 			String wire1 = string.split(" -> ")[0].split(" RSHIFT ")[0];
 			int value2 = Integer.parseInt(string.split(" -> ")[0].split(" RSHIFT ")[1]);
-			String wire3 = string.split(" -> ")[1];
-			
-			// check wire exist
-			boolean checkValue = false;
-			for (Test test : result) {
-				if (test.getLetter().equals(wire3)) {
-					checkValue = true;
-				}
-			}
-			
-			// add non existing wire
-			if (!checkValue) {
-				result.add(new Test(string.split(" -> ")[1], 0));
-			}
-			
+			String wire2 = string.split(" -> ")[1];
+
+			addToList(wire1);
+			addToList(wire2);
+
 			// get information
 			int value1 = 0, value3 = 0;
 			for (Test test : result) {
@@ -175,32 +139,22 @@ public class Day07 {
 					value1 = test.getValue();
 				}
 			}
-			
+
 			// calculate and store information
 			value3 = value1 >> value2;
 			for (Test test : result) {
-				if (test.getLetter().equals(wire3)) {
+				if (test.getLetter().equals(wire2)) {
 					test.setValue(value3);
 				}
-			}	
+			}
 		} else if (string.contains("NOT")) {
 			String wire1 = string.split(" -> ")[0].replace("NOT ", "");
 			System.out.println(wire1);
 			String wire2 = string.split(" -> ")[1];
-						
-			// check wire exist
-			boolean checkValue = false;
-			for (Test test : result) {
-				if (test.getLetter().equals(wire2)) {
-					checkValue = true;
-				}
-			}
-			
-			// add non existing wire
-			if (!checkValue) {
-				result.add(new Test(string.split(" -> ")[1], 0));
-			}
-			
+
+			addToList(wire1);
+			addToList(wire2);
+
 			// get information
 			int value1 = 0;
 			for (Test test : result) {
@@ -208,22 +162,50 @@ public class Day07 {
 					value1 = test.getValue();
 				}
 			}
-			
+
 			// calculate and store information
 			for (Test test : result) {
 				if (test.getLetter().equals(wire2)) {
 					test.setValue(u16neg(value1));
 				}
-			}	
+			}
 		} else {
-			// new element
-			result.add(new Test(string.split(" -> ")[1], Integer.parseInt(string.split(" -> ")[0])));
+
+			try {
+				result.add(new Test(string.split(" -> ")[1], Integer.parseInt(string.split(" -> ")[0])));
+			} catch (NumberFormatException e) {
+				String key = string.split(" -> ")[1];
+				System.out.println(key);
+				int value = 0;
+				for (Test test : result) {
+					if (test.getLetter().equals(key)) {
+						value = test.getValue();
+					}
+				}
+				result.add(new Test(key, value));
+			}
 		}
+
 		return 0;
 	}
 
+	private static void addToList(String wire) {
+		// check wire exist
+		boolean checkValue = false;
+		for (Test test : result) {
+			if (test.getLetter().equals(wire)) {
+				checkValue = true;
+			}
+		}
+
+		// add non existing wire
+		if (!checkValue) {
+			result.add(new Test(wire, 0));
+		}
+	}
+
 	private static int solution2(String string) {
-		return 0; 
+		return 0;
 	}
 
 	public int getSolution1() {
@@ -241,9 +223,9 @@ public class Day07 {
 	public void setSolution2(int solution2) {
 		this.solution2 = solution2;
 	}
-	
+
 	public static int u16neg(int i) {
-	    return ~i & 0xFFFF;
+		return ~i & 0xFFFF;
 	}
 
 }
@@ -251,7 +233,7 @@ public class Day07 {
 class Test {
 	private String letter;
 	private int value;
-	
+
 	public Test(String letter, int value) {
 		this.setLetter(letter);
 		this.setValue(value);
@@ -272,7 +254,5 @@ class Test {
 	public void setValue(int value) {
 		this.value = value;
 	}
-	
-	
-	
+
 }
